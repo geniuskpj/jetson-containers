@@ -51,6 +51,27 @@ jobs:
       - name: Show git repository state
         run: bash .github/workflows/scripts/step-git-status.sh
 
+        # --- NEW STEP: Install Python Dependencies ---
+      - name: Install Python Dependencies
+        run: |
+          echo "=== Installing Python Dependencies ==="
+          # Ensure pip is installed and up to date for the system python
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq python3-pip
+          
+          # Upgrade pip
+          sudo python3 -m pip install --upgrade pip
+          
+          # Install project requirements globally to ensure they are available to the build script
+          # --break-system-packages is used for newer Ubuntu/Debian versions where pip restricts system installs
+          if [ -f "requirements.txt" ]; then
+            sudo python3 -m pip install -r requirements.txt --break-system-packages
+            echo "✅ Requirements installed successfully"
+          else
+            echo "⚠️ requirements.txt not found, skipping dependency installation"
+          fi
+        shell: bash
+        
       - name: Test build onnxruntime package on orin
         id: package-test
         run: bash .github/workflows/scripts/step-build-package.sh onnxruntime
