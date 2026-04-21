@@ -1,9 +1,9 @@
 name: onnxruntime (dev)
 
 on:
-  pull_request:
-    types: [ready_for_review, synchronize, reopened]
-    branches: [ dev ]
+  # pull_request:
+  #   types: [ready_for_review, synchronize, reopened]
+  #   branches: [ dev ]
   workflow_dispatch:
     inputs:
       fork_repo:
@@ -18,7 +18,7 @@ on:
 
 jobs:
   test-package-orin:
-    runs-on: [self-hosted, linux, arm64, jetson, orin]
+    runs-on: [self-hosted, jetson, orin]
     name: "Package Build Test (orin)"
     if: github.event.pull_request.draft == false
 
