@@ -5,22 +5,22 @@ on:
   #   types: [ready_for_review, synchronize, reopened]
   #   branches: [ dev ]
   workflow_dispatch:
-    inputs:
-      fork_repo:
-        description: 'Fork repository (e.g., tokk-nv/jetson-containers)'
-        required: false
-        type: string
-      fork_branch:
-        description: 'Branch from fork to test (e.g., dev)'
-        required: false
-        type: string
-        default: 'dev'
+    # inputs:
+    #   fork_repo:
+    #     description: 'Fork repository (e.g., tokk-nv/jetson-containers)'
+    #     required: false
+    #     type: string
+    #   fork_branch:
+    #     description: 'Branch from fork to test (e.g., dev)'
+    #     required: false
+    #     type: string
+    #     default: 'dev'
 
 jobs:
   test-package-orin:
     runs-on: [self-hosted, jetson, orin]
     name: "Package Build Test (orin)"
-    if: github.event.pull_request.draft == false
+    # if: github.event.pull_request.draft == false
 
     steps:
       - name: Pre-checkout cleanup
