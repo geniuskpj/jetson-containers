@@ -18,7 +18,7 @@ on:
 
 jobs:
   test-package-orin:
-    runs-on: [self-hosted, jetson, orin]
+    runs-on: [ubuntu-22.04-arm]
     name: "Package Build Test (orin)"
     # if: github.event.pull_request.draft == false
 
